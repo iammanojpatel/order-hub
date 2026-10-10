@@ -108,7 +108,7 @@ lighthouse: ## Lighthouse CI against the running web app
 security: ## SAST + secrets + dependency + filesystem vuln scans
 	semgrep scan --config p/owasp-top-ten --config p/python --config p/typescript --config p/secrets --error --quiet
 	gitleaks detect --no-banner --redact
-	$(BE) uv run pip-audit --strict --progress-spinner off
+	$(BE) uv export --frozen --no-emit-project --format requirements-txt -o /tmp/reqs.txt -q && uv run pip-audit --strict --disable-pip -r /tmp/reqs.txt --progress-spinner off
 	$(FE) pnpm audit --audit-level high
 	trivy fs --scanners vuln,misconfig,secret --severity HIGH,CRITICAL --exit-code 1 .
 

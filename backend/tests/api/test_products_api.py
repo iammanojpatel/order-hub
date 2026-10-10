@@ -149,3 +149,23 @@ async def test_list_is_paginated(client: httpx.AsyncClient, make_token: TokenFac
 
 async def test_liveness(client: httpx.AsyncClient) -> None:
     assert (await client.get("/health/live")).json() == {"status": "ok"}
+
+
+async def test_docs_page_csp_allows_swagger_assets(client: httpx.AsyncClient) -> None:
+    r = await client.get("/docs")
+
+    assert r.status_code == 200
+    assert "cdn.jsdelivr.net" in r.headers["Content-Security-Policy"]
+
+
+async def test_api_responses_keep_strict_csp(client: httpx.AsyncClient) -> None:
+    r = await client.get("/health/live")
+
+    assert r.headers["Content-Security-Policy"].startswith("default-src 'none'")
+
+
+async def test_cross_origin_isolation_headers(client: httpx.AsyncClient) -> None:
+    r = await client.get("/health/live")
+
+    assert r.headers["Cross-Origin-Resource-Policy"] == "same-origin"
+    assert r.headers["Cross-Origin-Opener-Policy"] == "same-origin"
