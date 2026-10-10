@@ -1,5 +1,6 @@
 # Runs on every commit (fast) and push (slower). Install: `make setup`.
 default_install_hook_types: [pre-commit, commit-msg, pre-push]
+default_stages: [pre-commit]
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0

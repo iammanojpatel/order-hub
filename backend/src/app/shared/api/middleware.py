@@ -20,6 +20,8 @@ SECURITY_HEADERS = {
     "Content-Security-Policy": "default-src 'none'; frame-ancestors 'none'",
     "Permissions-Policy": "geolocation=(), camera=(), microphone=()",
     "Cache-Control": "no-store",
+    "Cross-Origin-Resource-Policy": "same-origin",
+    "Cross-Origin-Opener-Policy": "same-origin",
 }
 
 # Swagger UI / ReDoc load JS + CSS from jsDelivr and use inline scripts, so the docs pages get a

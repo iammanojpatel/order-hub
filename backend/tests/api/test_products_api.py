@@ -162,3 +162,10 @@ async def test_api_responses_keep_strict_csp(client: httpx.AsyncClient) -> None:
     r = await client.get("/health/live")
 
     assert r.headers["Content-Security-Policy"].startswith("default-src 'none'")
+
+
+async def test_cross_origin_isolation_headers(client: httpx.AsyncClient) -> None:
+    r = await client.get("/health/live")
+
+    assert r.headers["Cross-Origin-Resource-Policy"] == "same-origin"
+    assert r.headers["Cross-Origin-Opener-Policy"] == "same-origin"
