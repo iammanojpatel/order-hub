@@ -1,0 +1,30 @@
+# Env & secrets
+.env
+.env.*
+!.env.example
+# Python
+__pycache__/
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+mutants/
+# Node / Next
+node_modules/
+.next/
+coverage/
+playwright-report/
+test-results/
+*.tsbuildinfo
+next-env.d.ts
+# Reports
+zap-report.html
+.lighthouseci/
+# OS / editors
+.DS_Store
+.idea/
+# Claude Code personal files
+.claude/settings.local.json
+CLAUDE.local.md

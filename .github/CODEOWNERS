@@ -1,0 +1,5 @@
+# Require review from owners for sensitive areas
+*                                   @iammanojpatel
+/backend/src/app/shared/            @iammanojpatel
+/backend/migrations/                @iammanojpatel
+/.github/                           @iammanojpatel

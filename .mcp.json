@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "mysql": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@bytebase/dbhub", "--transport", "stdio", "--dsn", "${MYSQL_MCP_DSN:-mysql://app:app@127.0.0.1:3306/app}"]
+    }
+  }
+}

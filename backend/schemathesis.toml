@@ -1,0 +1,3 @@
+# Contract-test tuning. 428 is the RFC 6585-correct answer for a missing If-Match.
+[checks.missing_required_header]
+expected-statuses = [400, 401, 403, 406, 415, 422, 428]

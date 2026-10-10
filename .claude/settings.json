@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(make *)",
+      "Bash(cd backend && *)",
+      "Bash(cd frontend && *)",
+      "mcp__mysql"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Edit(./backend/migrations/versions/0001_*)"
+    ]
+  },
+  "enableAllProjectMcpServers": true
+}
