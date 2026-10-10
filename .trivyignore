@@ -1,0 +1,5 @@
+# Accepted risks. Each entry needs: why it's safe, who accepted it, and an expiry (exp:) to force review.
+# braces <=3.0.3 ReDoS/stack-exhaustion — no patched release exists. Dev-only (eslint-config-next ->
+# fast-glob -> micromatch -> braces); never bundled or shipped; only processes our own repo globs.
+GHSA-vfj7-8cjw-p6xm exp:2027-01-31
+CVE-2026-93687 exp:2027-01-31
