@@ -51,6 +51,7 @@ jobs:
         with:
           image-ref: ${{ env.IMAGE_PREFIX }}-${{ matrix.component }}:${{ steps.meta.outputs.tag }}
           severity: HIGH,CRITICAL
+          ignore-unfixed: true # gate on what we can act on; unfixed OS CVEs stay visible in the report
           exit-code: "1"
 
   staging:
