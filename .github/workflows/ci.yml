@@ -51,7 +51,7 @@ jobs:
         with: { enable-cache: true }
       - run: uv sync --frozen
       - run: uv run pytest --cov --cov-report=xml --cov-report=term -q
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with: { name: backend-coverage, path: backend/coverage.xml }
 
   frontend:
@@ -110,7 +110,7 @@ jobs:
       - name: k6 smoke
         run: TOKEN="$API_TOKEN" k6 run perf/k6/smoke.js
       - if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: e2e-artifacts
           path: |
