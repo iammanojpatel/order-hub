@@ -17,6 +17,6 @@ make seed           # demo data
 ## Working with Claude Code
 Open the folder in VSCode, start `claude`, and use:
 - `/feature <description or issue #>` for the full autonomous SDLC (plan → design → TDD → tests → security → perf → review → PR)
-- `/plan`, `/design`, `/adr`, `/tdd`, `/test-all`, `/review`, `/security-scan`, `/perf-test`, `/debug`, `/ship`
+- `/plan`, `/system-design`, `/adr`, `/tdd`, `/test-all`, `/review`, `/security-scan`, `/perf-test`, `/debug`, `/ship`
 
 See `CLAUDE.md` for the project rules every agent follows, and `docs/` for architecture and ADRs.
