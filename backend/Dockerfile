@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.7
 # ── Build stage: resolve and install dependencies with uv ──────────────────────
 FROM python:3.13-slim AS build
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+COPY --from=ghcr.io/astral-sh/uv:0.13.0 /uv /usr/local/bin/uv
 ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy UV_PYTHON_DOWNLOADS=never
 WORKDIR /app
 COPY pyproject.toml uv.lock ./
@@ -13,7 +13,10 @@ RUN --mount=type=cache,target=/root/.cache/uv uv sync --frozen --no-dev
 
 # ── Runtime stage: minimal, non-root, read-only friendly ───────────────────────
 FROM python:3.13-slim AS runtime
-RUN groupadd --system app && useradd --system --gid app --no-create-home app
+# pip is not needed at runtime (the app runs from /app/.venv). Removing it also removes the
+# copies of urllib3/msgpack/setuptools that pip vendors, which image scanners flag.
+RUN python -m pip uninstall -y pip && rm -rf /usr/local/lib/python3.13/ensurepip \
+ && groupadd --system app && useradd --system --gid app --no-create-home app
 WORKDIR /app
 COPY --from=build --chown=app:app /app /app
 ENV PATH="/app/.venv/bin:$PATH" PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1
