@@ -28,7 +28,7 @@ jobs:
     strategy:
       matrix: { component: [backend, frontend] }
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - id: meta
         run: echo "tag=sha-${GITHUB_SHA::12}" >> "$GITHUB_OUTPUT"
       - uses: docker/setup-qemu-action@c7c53464625b32c7a7e944ae62b3e17d2b600130 # v3.7.0
@@ -58,7 +58,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: { name: staging, url: "${{ vars.STAGING_URL }}" }
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       # TODO(platform): replace with your target — e.g. AWS ECS/EKS, GCP Cloud Run, Azure Container Apps, Fly.io.
       # 1) authenticate via OIDC  2) run `alembic upgrade head` as a one-off task (expand-only migrations)
       # 3) roll out the new image tag  4) wait for health checks
@@ -75,7 +75,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: { name: production, url: "${{ vars.PRODUCTION_URL }}" } # add required reviewers in repo settings
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Deploy to production
         run: echo "Deploy ${{ needs.build.outputs.tag }} to production (configure for your platform)"
       - uses: grafana/setup-k6-action@43b9fc21641a76002687994433dd586f56e791b1 # v1.2.2
