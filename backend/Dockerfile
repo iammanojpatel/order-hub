@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.7
 # ── Build stage: resolve and install dependencies with uv ──────────────────────
-FROM python:3.13-slim AS build
+FROM python:3.14-slim AS build
 COPY --from=ghcr.io/astral-sh/uv:0.13.0 /uv /usr/local/bin/uv
 ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy UV_PYTHON_DOWNLOADS=never
 WORKDIR /app
@@ -12,7 +12,7 @@ COPY alembic.ini ./
 RUN --mount=type=cache,target=/root/.cache/uv uv sync --frozen --no-dev
 
 # ── Runtime stage: minimal, non-root, read-only friendly ───────────────────────
-FROM python:3.13-slim AS runtime
+FROM python:3.14-slim AS runtime
 # pip is not needed at runtime (the app runs from /app/.venv). Removing it also removes the
 # copies of urllib3/msgpack/setuptools that pip vendors, which image scanners flag.
 RUN python -m pip uninstall -y pip && rm -rf /usr/local/lib/python3.13/ensurepip \
